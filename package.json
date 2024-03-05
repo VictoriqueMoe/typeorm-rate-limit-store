@@ -16,7 +16,8 @@
     "lint": "npx eslint .",
     "lint:fix": "npx eslint --fix .",
     "prettier": "npx prettier ./src --check",
-    "prettier:fix": "npx prettier ./src --write"
+    "prettier:fix": "npx prettier ./src --write",
+    "prepare": "husky install"
   },
   "keywords": [],
   "author": "Victoria",
@@ -30,6 +31,13 @@
     "tsup": "^8.0.2",
     "typeorm": "^0.3.20",
     "typescript": "^5.3.3",
-    "typescript-eslint": "^7.1.0"
+    "typescript-eslint": "^7.1.0",
+    "husky": "^9.0.11"
+  },
+  "lint-staged": {
+    "src/**/*.ts": [
+      "eslint --cache --fix",
+      "prettier --write"
+    ]
   }
 }
