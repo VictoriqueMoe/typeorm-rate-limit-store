@@ -34,6 +34,11 @@
     "typescript-eslint": "^7.1.0",
     "husky": "^9.0.11"
   },
+  "homepage": "https://github.com/VictoriqueMoe/typeorm-rate-limit-store",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/VictoriqueMoe/typeorm-rate-limit-store.git"
+  },
   "lint-staged": {
     "src/**/*.ts": [
       "eslint --cache --fix",
