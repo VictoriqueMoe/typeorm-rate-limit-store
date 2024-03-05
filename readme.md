@@ -1,6 +1,7 @@
 # rate-limit-typeorm
 
-A [`TypeORM`](https://typeorm.io) store for [`express-rate-limit`](https://github.com/nfriedly/express-rate-limit)
+A [`TypeORM`](https://typeorm.io) store for [`express-rate-limit`](https://github.com/nfriedly/express-rate-limit).  
+Designed for use with TypeORM as a backing store for express rate limiting in a clustered environment.
 
 ## Installation
 
@@ -9,6 +10,8 @@ npm install typeorm-rate-limit-store
 ```
 
 ## Usage
+
+You will need to implement an entity for the rate-limiting model, and then instantiate the store by passing in that model.
 
 ### Implement the `IExpressRateLimitModel` entity:
 
@@ -30,7 +33,7 @@ export class ExpressRateLimitStoreModel implements IExpressRateLimitModel{
 }
 ```
 
-### Instantiate the store passing in the model
+### Instantiate the store passing in the model:
 
 ```ts
 import {ExpressRateLimitTypeOrmStore} from 'typeorm-rate-limit-store';
@@ -47,4 +50,4 @@ app.use(
 );
 ```
 
-Both CJS and ESM modules are provided, but it is assumed you will be using ESM as this package exports that as default
+Both CJS and ESM modules are provided, but it is assumed you will be using ESM as this package exports that as the default.
