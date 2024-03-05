@@ -1,0 +1,35 @@
+{
+  "name": "typeorm-rate-limit-store",
+  "version": "1.0.0",
+  "description": "A typeOrm store for the `express-rate-limit` middleware",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "include": [
+    "src/**/*"
+  ],
+  "type": "module",
+  "scripts": {
+    "build": "tsup",
+    "lint": "npx eslint .",
+    "lint:fix": "npx eslint --fix .",
+    "prettier": "npx prettier ./src --check",
+    "prettier:fix": "npx prettier ./src --write"
+  },
+  "keywords": [],
+  "author": "Victoria",
+  "license": "MIT",
+  "devDependencies": {
+    "@eslint/js": "^8.57.0",
+    "eslint": "^8.57.0",
+    "express-rate-limit": "^7.2.0",
+    "prettier": "3.2.5",
+    "ts-node": "^10.9.2",
+    "tsup": "^8.0.2",
+    "typeorm": "^0.3.20",
+    "typescript": "^5.3.3",
+    "typescript-eslint": "^7.1.0"
+  }
+}
