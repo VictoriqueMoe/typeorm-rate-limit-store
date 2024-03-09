@@ -39,15 +39,24 @@ export class ExpressRateLimitStoreModel implements IExpressRateLimitModel{
 import {ExpressRateLimitTypeOrmStore} from 'typeorm-rate-limit-store';
 import {ExpressRateLimitStoreModel} from "ExpressRateLimitStoreModel.js";
 
-const reposetry = getDatastore().getRepository(ExpressRateLimitStoreModel)
+const repository = getDatastore().getRepository(ExpressRateLimitStoreModel)
 app.use(
     rateLimit({
         windowMs: 1000,
         limit: 1,
         standardHeaders: true,
-        store: new ExpressRateLimitTypeOrmStore(reposetry),
+        store: new ExpressRateLimitTypeOrmStore(repository),
     }),
 );
 ```
+
+### Options:
+The `ExpressRateLimitTypeOrmStore` constructor takes the following parameters:
+
+| Option     | Description                                                                                                         | Required |
+|------------|:--------------------------------------------------------------------------------------------------------------------|----------|
+| repository | The type orm repository that is built from the `IExpressRateLimitModel` interface                                   | True     |
+| prefix     | A string that will prefix the key, use this if you require multiple instances of the `ExpressRateLimitTypeOrmStore` | False    |
+
 
 Both CJS and ESM modules are provided, but it is assumed you will be using ESM as this package exports that as the default.
