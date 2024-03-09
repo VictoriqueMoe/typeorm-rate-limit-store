@@ -1,6 +1,6 @@
 {
   "name": "typeorm-rate-limit-store",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "A typeOrm store for the `express-rate-limit` middleware",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
