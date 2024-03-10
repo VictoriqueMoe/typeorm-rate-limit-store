@@ -1,15 +1,22 @@
 import type { ClientRateLimitInfo, IncrementResponse, Options, Store } from "express-rate-limit";
-import type { IExpressRateLimitModel } from "./IExpressRateLimitModel";
+import type { IExpressRateLimitModel } from "./IExpressRateLimitModel.js";
 import type { Repository } from "typeorm";
 
 export class ExpressRateLimitTypeOrmStore implements Store {
     private windowMs!: number;
 
-    public constructor(private readonly repo: Repository<IExpressRateLimitModel>) {}
+    public constructor(
+        private readonly repo: Repository<IExpressRateLimitModel>,
+        public readonly prefix = "rl_",
+    ) {}
 
     public init(options: Options): void {
         this.windowMs = options.windowMs;
         setInterval(() => this.clearExpired(), this.windowMs);
+    }
+
+    private prefixKey(key: string): string {
+        return `${this.prefix}${key}`;
     }
 
     private async clearExpired(): Promise<void> {
@@ -35,7 +42,7 @@ export class ExpressRateLimitTypeOrmStore implements Store {
             return fromDb;
         }
         const newModel: IExpressRateLimitModel = {
-            key,
+            key: this.prefixKey(key),
             resetTime: new Date(Date.now() + this.windowMs),
             totalHits: 0,
         };
@@ -69,7 +76,7 @@ export class ExpressRateLimitTypeOrmStore implements Store {
 
     public async resetKey(key: string): Promise<void> {
         await this.repo.delete({
-            key,
+            key: this.prefixKey(key),
         });
     }
 
@@ -86,7 +93,7 @@ export class ExpressRateLimitTypeOrmStore implements Store {
 
     private getFromDb(key: string): Promise<IExpressRateLimitModel | null> {
         return this.repo.findOneBy({
-            key,
+            key: this.prefixKey(key),
         });
     }
 
